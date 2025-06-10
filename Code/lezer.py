@@ -8,7 +8,11 @@ import matplotlib.pyplot as plt
 import csv as csv
 
 
-with open('1-2-M.csv', 'r') as yurr:
+a_lijst = [1, 2, 3]
+b_lijst = [1, 2, 4, 6, 8, 10, 20, 30, 40, 45, 50, 55, 60]
+#for b in b_lijst:
+#    for a in a_lijst:
+with open(f'{3}-{1}-M.csv', 'r') as yurr:
     hoogte_lijst = []
     tijd_lijst = []
     teller = 0
@@ -24,7 +28,7 @@ with open('1-2-M.csv', 'r') as yurr:
                     if data_opgeknipt and data_opgeknipt[0] != 'Track':
                         tijd = int(data_opgeknipt[0])
                         y1 = float(data_opgeknipt[2])
-                        hoogte = 1000 - y1
+                        hoogte = y1
 
                         tijd_lijst.append(tijd)
                         hoogte_lijst.append(hoogte)
