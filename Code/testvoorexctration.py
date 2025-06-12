@@ -22,7 +22,7 @@ b_lijst = [1, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 30, 40, 45, 50, 55, 60]
 #for b in b_lijst:
 #    for a in a_lijst:
 # for o in order_lijst:
-with open(f'2-12-M.csv', 'r') as yurr:
+with open(f'3-60-M-imp.csv', 'r') as yurr:
     hoogte_lijst = []
     tijd_lijst = []
     teller = 0
