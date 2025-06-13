@@ -21,11 +21,11 @@ order_lijst = ["2-1", "3-1", "1-2", "2-2", "3-2", "1-4", "3-4", "1-6", "2-6", "3
 
 # order_lijst = ["2-1", "2-2", "3-4", "2-6", "3-8", "3-10", "3-12", "2-14", "2-16", "1-30", "2-45", "2-60"]
 a_lijst = [1, 2, 3]
-b_lijst = [1, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 30, 40, 45, 50, 55, 60]
+b_lijst = [1, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 30, 40, 45, 50, 55, 60, 100, 140, 200, 240, 300, 340]
 for b in b_lijst:
-   for a in a_lijst:
+  for a in a_lijst:
 # for o in order_lijst:
-        with open(f'{a}-{b}-M.csv', 'r') as yurr:
+        with open(f'C:/Users/salad\Documents/GitHub/2025-Projects_Team-1-Bouncing-on-Paper-The-Surprising-Restitution-Coefficient-of-a-Paper-Stack-/Code/A4 Medium knikker (blauw)/{a}-{b}-M.csv', 'r') as yurr:
             hoogte_lijst = []
             tijd_lijst = []
             teller = 0
@@ -56,17 +56,11 @@ for b in b_lijst:
 
             # Snelheden berekenen (voor bepaling van toppen)
             snelheden = []
-            snelhedenN = []
-            n = 1
 
             for i in range(1, len(hoogte_lijst)):
                 dy = hoogte_lijst[i] - hoogte_lijst[i - 1]
                 dt = tijd_lijst[i] - tijd_lijst[i - 1]
-                dyn = hoogte_lijst[i - n] - hoogte_lijst[i - n - 1]
-                dtn = tijd_lijst[i - n] - tijd_lijst[i - n - 1]
                 snelheid = dy / dt if dt != 0 else 0
-                snelheidn = dyn / dtn if dtn != 0 else 0
-                snelhedenN.append(snelheidn)
                 snelheden.append(snelheid)
 
 
@@ -74,12 +68,10 @@ for b in b_lijst:
             maxima_tijden = [0]
             impact_tijden = []
             impact_snelheden = []
-            j = 0
             for i in range(1, len(snelheden)):
                 if snelheden[i - 1] > 0 and snelheden[i] < 0 and len(maxima_tijden) <= 3 and i > 60:  # filter op realistische waarde
                     maxima_tijden.append(i)
-                if snelheden[i - 1] < 0 and snelheden[i] > 0 and len(impact_snelheden) <= 1 and i > 60:
-                    j = i
+                if snelheden[i - 1] < 0 and snelheden[i] > 0 and len(impact_snelheden) <= 3 and i > 60:
                     impact_snelheden.append(abs(snelheden[i - 1]))
                     impact_snelheden.append(snelheden[i])
                     impact_tijden.append(i - 1)
@@ -100,18 +92,8 @@ for b in b_lijst:
             # cor3_h = maxima_hoogtes[3] / maxima_hoogtes[2]
 
             coefficienten_v = []
-            cor=[]
-            m_list = []
-            #cor1_v = impact_snelheden[1] / impact_snelheden[0]
-            for m in range(1,20):
-                cor1_v = abs(snelheden[j+m]) / abs(snelheden[j-m])
-                cor.append(cor1_v)
-                m_list.append(m)
-
-            print("Frame of impact:", j)
-            print("Velocity used for cor:", snelheden[j-1], snelheden[j+1])
-            # cor1_v = cor1_v**2
-            # cor2_v = impact_snelheden[3] / impact_snelheden[2]
+            cor1_v = impact_snelheden[1] / impact_snelheden[0]
+            cor2_v = impact_snelheden[3] / impact_snelheden[2]
             # cor3_v = impact_snelheden[3] / impact_snelheden[2]
 
             coefficienten_1_h_lijst.append(cor1_h)
@@ -119,14 +101,14 @@ for b in b_lijst:
             # coefficienten_3_lijst.append(cor3_h)
 
             coefficienten_1_v_lijst.append(cor1_v)
-            # coefficienten_2_v_lijst.append(cor2_v)
+            coefficienten_2_v_lijst.append(cor2_v)
             # coefficienten_3_v_lijst.append(cor3_v)
 
-            # plt.figure(1)
-            # plt.plot(tijd_lijst, hoogte_lijst)
-            # plt.xlabel("Time (frames)")
-            # plt.ylabel('Height (px)')
-            # plt.ylim(0, 200)
+            plt.figure(1)
+            plt.plot(tijd_lijst, hoogte_lijst)
+            plt.xlabel("Time (frames)")
+            plt.ylabel('Height (px)')
+            plt.ylim(0, 200)
             # plt.show()
 
             snelheden.append(0)            
@@ -141,9 +123,6 @@ for b in b_lijst:
             print(impact_tijden)
             print(impact_snelheden)
 
-# print(coefficienten_1_lijst)
-# print(coefficienten_2_lijst)
-# print(coefficienten_3_lijst)
 # print(impact_snelheden)
 
 papier_lijst = [1, 1, 1, 2, 2, 2, 4, 4, 4, 6, 6, 6, 8, 8, 8, 10, 10, 10, 12, 12, 12, 14, 14, 14, 16, 16, 16, 18, 18, 18, 20, 20, 20, 30, 30, 30, 40, 40, 40, 45, 45, 45, 50, 50, 50, 55, 55, 55, 60, 60, 60]
@@ -151,7 +130,7 @@ papier_lijst = [1, 1, 1, 2, 2, 2, 4, 4, 4, 6, 6, 6, 8, 8, 8, 10, 10, 10, 12, 12,
 
 plt.figure(2)
 plt.plot(papier_lijst, coefficienten_1_h_lijst, 'o', label='h1/h0 (first bounce)')
-# plt.plot(papier_lijst, coefficienten_2_h_lijst, 'o', label='h2/h1 (second bounce)')
+plt.plot(papier_lijst, coefficienten_2_h_lijst, 'o', label='h2/h1 (second bounce)')
 # plt.plot(papier_lijst, coefficienten_3_h_lijst, label='h3/h2 (third bounce)')
 
 plt.xlabel('# of paper pages (amount)')
@@ -162,7 +141,7 @@ plt.legend()
 
 plt.figure(3)
 plt.plot(papier_lijst, coefficienten_1_v_lijst, 'o', label='v1/v0 (first impact)')
-# plt.plot(papier_lijst, coefficienten_2_v_lijst, 'o', label='v2/v1 (second impact)')
+plt.plot(papier_lijst, coefficienten_2_v_lijst, 'o', label='v2/v1 (second impact)')
 # plt.plot(papier_lijst, coefficienten_3_v_lijst, label='v3/v2 (third impact)')
 
 # plt.ylim(0, 0.6)
