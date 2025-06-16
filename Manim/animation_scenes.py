@@ -111,17 +111,10 @@ class Animation(Scene):
         self.play(FadeOut(textboven), FadeOut(texth1), FadeOut(texth2), FadeOut(lineis1), FadeOut(lineis2))
 
         # ax = Axes(
-        #     x_range=[0,500, 50], y_range=[0,1,0.1], x_axis_config= {"numbers_to_include":[]})
+        #     x_range=[0,500, 50], y_range=[0,1,0.1], x_axis_config= {"numbers_to_include":[]}, y_axis_config = {"numbers_to_include":[]})
         # #labels = ax.get_axis_labels(x_label ="aantal vellen papier", y_label = "Resitutie Coëfficient (CoR)")
         # self.add(ax)
 
-        # assen = Axes(
-        #     x_range=[-3, 3, 1],   # [min, max, stapgrootte]
-        #     y_range=[-1, 9, 1],
-        #     axis_config={"color": BLUE},
-        #     x_axis_config={"numbers_to_include": [-2, 0, 2]},
-        #     y_axis_config={"numbers_to_include": [0, 4, 8]},
-        # )
 
         #labels = assen.get_axis_labels(x_label="x", y_label="f(x)")
 
