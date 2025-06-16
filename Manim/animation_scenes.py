@@ -128,7 +128,11 @@ class Animation(Scene):
         # arrowdal = Arrow([], [0,2,0], buff = 0) #plek nog toevoegen
         # arrowpiek = Arrow([], [0,2,0], buff = 0) #plek nog toevoegen
         # textdal = Text("The coefficient of restitution is lowest for x sheets")
+        # textdal.move_to( UP*3)
+
         # textpiek = Text("The coefficient of restitution is highest for x sheets")
+        # textpiek.move_to(UP*3)
+
         # self.play(Create(arrowdal), Create(textdal))
         # self.wait(2)
         # self.play(FadeOut(arrowdal), FadeOut(textdal))
