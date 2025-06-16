@@ -70,9 +70,9 @@ for b in b_lijst:
             impact_tijden = []
             impact_snelheden = []
             for i in range(1, len(snelheden)):
-                if snelheden[i - 1] > 0 and snelheden[i] < 0 and len(maxima_tijden) <= 3 and i > 60:  # filter op realistische waarde
+                if snelheden[i - 1] > 0 and snelheden[i] < 0 and len(maxima_tijden) <= 3 and i > 30:  # filter op realistische waarde
                     maxima_tijden.append(i)
-                if snelheden[i - 1] < 0 and snelheden[i] > 0 and len(impact_snelheden) <= 3 and i > 60:
+                if snelheden[i - 1] < 0 and snelheden[i] > 0 and len(impact_snelheden) <= 3 and i > 30:
                     impact_snelheden.append(abs(snelheden[i - 1]))
                     impact_snelheden.append(snelheden[i])
                     impact_tijden.append(i - 1)
@@ -131,26 +131,26 @@ for b in b_lijst:
 # papier_lijst = [1, 1, 1, 2, 2, 2, 4, 4, 4, 6, 6, 6, 8, 8, 8, 10, 10, 10, 12, 12, 12, 14, 14, 14, 16, 16, 16, 18, 18, 18, 20, 20, 20, 30, 30, 30, 40, 40, 40, 45, 45, 45, 50, 50, 50, 55, 55, 55, 60, 60, 60]
 # papier_lijst = [1, 2, 4, 6, 8, 10, 12, 14, 16, 30, 45, 60]
 
-plt.figure(2)
-plt.plot(papier_lijst, coefficienten_1_h_lijst, 'o', label='h1/h0 (first bounce)')
+# plt.figure(2)
+# plt.plot(papier_lijst, coefficienten_1_h_lijst, 'o', label='h1/h0 (first bounce)')
 # plt.plot(papier_lijst, coefficienten_2_h_lijst, 'o', label='h2/h1 (second bounce)')
 # plt.plot(papier_lijst, coefficienten_3_h_lijst, label='h3/h2 (third bounce)')
 
-plt.xlabel('# of paper pages (amount)')
-plt.ylabel('Restitutioncoefficient (ratio)')
-plt.legend()
+# plt.xlabel('# of paper pages (amount)')
+# plt.ylabel('Restitutioncoefficient (ratio)')
+# plt.legend()
 # plt.show()
 
 
-plt.figure(3)
-plt.plot(papier_lijst, coefficienten_1_v_lijst, 'o', label='v1/v0 (first impact)')
+# plt.figure(3)
+# plt.plot(papier_lijst, coefficienten_1_v_lijst, 'o', label='v1/v0 (first impact)')
 # plt.plot(papier_lijst, coefficienten_2_v_lijst, 'o', label='v2/v1 (second impact)')
 # plt.plot(papier_lijst, coefficienten_3_v_lijst, label='v3/v2 (third impact)')
 
-plt.ylim(0, 0.6)
-plt.xlabel('# of paper pages (amount)')
-plt.ylabel('Restitutioncoefficient (ratio)')
-plt.legend()
+# plt.ylim(0, 0.6)
+# plt.xlabel('# of paper pages (amount)')
+# plt.ylabel('Restitutioncoefficient (ratio)')
+# plt.legend()
 plt.show()
 
 # plt.figure(4)
