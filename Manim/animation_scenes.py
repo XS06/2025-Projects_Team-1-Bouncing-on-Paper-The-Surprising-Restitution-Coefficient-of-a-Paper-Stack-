@@ -110,7 +110,7 @@ class Animation(Scene):
         self.play(Write(textboven))
         self.play(FadeOut(textboven), FadeOut(texth1), FadeOut(texth2), FadeOut(lineis1), FadeOut(lineis2))
 
-        # grafiek maken
+    # grafiek maken
         # ax = Axes(
         #     x_range=[0,500, 50], y_range=[0,1,0.1], x_axis_config= {"numbers_to_include":[]}, y_axis_config = {"numbers_to_include":[]})
         # #labels = ax.get_axis_labels(x_label ="aantal vellen papier", y_label = "Resitutie Coëfficient (CoR)")
@@ -133,6 +133,20 @@ class Animation(Scene):
         # self.wait(2)
         # self.play(FadeOut(arrowdal), FadeOut(textdal))
         # self.play(Create(arrowpiek), Create(textpiek))
+        # self.wait(FadeOut(arrowpiek), FadeOut(textpiek))
+
+        #self.play(FadeOut(assen), FadeOut(functie))
+
+    # Hier nu de 2 filmpjes naast elkaar voegen die we ook gebruiken bij het tracken van de aantal papiertjes met de hoogste CoR en laagste CoR
+
+        #textreden = Text("The reason for this is probably ....")
+        # self.play(Write(textreden))
+        # self.wait(5)
+        # self.play(FadeOut(textreden))
+
+
+
+        
 
 
 
