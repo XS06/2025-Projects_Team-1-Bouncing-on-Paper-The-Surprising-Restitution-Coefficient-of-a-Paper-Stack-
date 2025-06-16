@@ -115,10 +115,9 @@ class Animation(Scene):
         # #labels = ax.get_axis_labels(x_label ="aantal vellen papier", y_label = "Resitutie Coëfficient (CoR)")
         # self.add(ax)
 
-
         #labels = assen.get_axis_labels(x_label="x", y_label="f(x)")
 
-        #functie = assen.plot(lambda x: x**2, color=YELLOW)
+        #functie = assen.plot(lambda x: x**2, color=YELLOW) Hier nog eigenfunctie toepassen
 
         #functielabel = assen.get_graph_label(functie, label="x^2")
 
