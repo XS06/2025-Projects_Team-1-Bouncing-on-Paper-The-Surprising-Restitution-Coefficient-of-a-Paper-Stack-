@@ -22,7 +22,7 @@ b_lijst = [1, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 30, 40, 45, 50, 55, 60]
 #for b in b_lijst:
 #    for a in a_lijst:
 # for o in order_lijst:
-with open(f'3-60-M-imp.csv', 'r') as yurr:
+with open(f'C:/Users/salad/Documents/GitHub/2025-Projects_Team-1-Bouncing-on-Paper-The-Surprising-Restitution-Coefficient-of-a-Paper-Stack-/Code/A5 Medium knikker (blauw)/1-60-B-A5-imp.csv', 'r') as yurr:
     hoogte_lijst = []
     tijd_lijst = []
     teller = 0
