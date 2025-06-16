@@ -7,25 +7,25 @@ import math as mt
 import matplotlib.pyplot as plt
 import csv as csv
 
+
 test_max_snelheid = []
 test_minimale_hoogte = []
+
 coefficienten_1_h_lijst = []
 coefficienten_2_h_lijst = []
 coefficienten_3_h_lijst = []
+
 coefficienten_1_v_lijst = []
 coefficienten_2_v_lijst = []
 coefficienten_3_v_lijst = []
 
-# deze heeft alle huidige met data op 1 column
-order_lijst = ["2-1", "3-1", "1-2", "2-2", "3-2", "1-4", "3-4", "1-6", "2-6", "3-6", "1-8", "3-8", "3-10", "1-12", "3-12", "1-14", "2-14", "3-14", "1-16", "2-16", "3-16", "1-30", "2-45", "2-60"]
 
-# order_lijst = ["2-1", "2-2", "3-4", "2-6", "3-8", "3-10", "3-12", "2-14", "2-16", "1-30", "2-45", "2-60"]
 a_lijst = [1, 2, 3]
 b_lijst = [1, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 30, 40, 45, 50, 55, 60, 100, 140, 200, 240, 300, 340]
 papier_lijst = []
+
 for b in b_lijst:
   for a in a_lijst:
-# for o in order_lijst:
         with open(f'E:/Documents/GitHub/2025-Projects_Team-1-Bouncing-on-Paper-The-Surprising-Restitution-Coefficient-of-a-Paper-Stack-/Code/A4 Medium knikker (blauw)/{a}-{b}-M.csv', 'r') as yurr:
             hoogte_lijst = []
             tijd_lijst = []
@@ -36,7 +36,7 @@ for b in b_lijst:
                 data_opgeknipt = regel.strip().split()
 
                 if teller == 3:
-                    print('daggoe')
+                    print()
                 else:    
                     if data_opgeknipt and data_opgeknipt[0] != 'Frame':
                         if data_opgeknipt and data_opgeknipt[0] != 'Tracks':
@@ -69,6 +69,7 @@ for b in b_lijst:
             maxima_tijden = [0]
             impact_tijden = []
             impact_snelheden = []
+
             for i in range(1, len(snelheden)):
                 if snelheden[i - 1] > 0 and snelheden[i] < 0 and len(maxima_tijden) <= 3 and i > 60:  # filter op realistische waarde
                     maxima_tijden.append(i)
@@ -105,58 +106,62 @@ for b in b_lijst:
             coefficienten_2_v_lijst.append(cor2_v)
             # coefficienten_3_v_lijst.append(cor3_v)
 
-            # plt.figure(1)
-            # plt.plot(tijd_lijst, hoogte_lijst)
-            # plt.xlabel("Time (frames)")
-            # plt.ylabel('Height (px)')
-            # plt.ylim(0, 200)
-            # # plt.show()
+            plt.figure(1, figsize=(15, 15))
+            plt.suptitle('Position and speed graphs, of all measurements combined (messy)')
+            plt.subplot(211)
+            plt.title('Height over time, all measurements')
+            plt.plot(tijd_lijst, hoogte_lijst)
+            plt.xlabel('Time (frames)')
+            plt.ylabel('Height (px)')
 
-            # snelheden.append(0)            
-            # plt.figure(4)
-            # plt.plot(tijd_lijst, snelheden)
-            # plt.xlim(0, 400)
-            # plt.ylim(-20, 20)
+            snelheden.append(0)            
+            plt.subplot(212)
+            plt.title('Speed over time, all measurements')
+            plt.plot(tijd_lijst, snelheden)
+            plt.xlabel('Time (frames)')
+            plt.ylabel('Speed (px/frame)')
+            plt.xlim(0, 400)
+            plt.ylim(-20, 20)
+            plt.savefig('A4_AUTOMATED_POS_AND_SPEED.png')
 
             test_max_snelheid.append(max(snelheden))
             # print(cor1, cor2, cor3)
             test_minimale_hoogte.append(min(hoogte_lijst))
+            
             print(impact_tijden)
             print(impact_snelheden)
             print(f'File: {a}-{b}')
+            
             papier_lijst.append(b)
 
 # print(impact_snelheden)
 
-# papier_lijst = [1, 1, 1, 2, 2, 2, 4, 4, 4, 6, 6, 6, 8, 8, 8, 10, 10, 10, 12, 12, 12, 14, 14, 14, 16, 16, 16, 18, 18, 18, 20, 20, 20, 30, 30, 30, 40, 40, 40, 45, 45, 45, 50, 50, 50, 55, 55, 55, 60, 60, 60]
-# papier_lijst = [1, 2, 4, 6, 8, 10, 12, 14, 16, 30, 45, 60]
 
-plt.figure(2)
+plt.figure(2, figsize=(15, 10))
+plt.suptitle('CoR against amount of paper pages, all measurements')
+plt.subplot(221)
+plt.title('CoR calculated with height ratio (h_after_bounce / h_initial)')
 plt.plot(papier_lijst, coefficienten_1_h_lijst, 'o', label='h1/h0 (first bounce)')
 # plt.plot(papier_lijst, coefficienten_2_h_lijst, 'o', label='h2/h1 (second bounce)')
 # plt.plot(papier_lijst, coefficienten_3_h_lijst, label='h3/h2 (third bounce)')
-
 plt.xlabel('# of paper pages (amount)')
 plt.ylabel('Restitutioncoefficient (ratio)')
+plt.ylim(0, 0.6)
 plt.legend()
-# plt.show()
 
 
-plt.figure(3)
+plt.subplot(222)
+plt.title('CoR calculated with speed ratio (v_after_impact / v_before_impact)')
 plt.plot(papier_lijst, coefficienten_1_v_lijst, 'o', label='v1/v0 (first impact)')
 # plt.plot(papier_lijst, coefficienten_2_v_lijst, 'o', label='v2/v1 (second impact)')
 # plt.plot(papier_lijst, coefficienten_3_v_lijst, label='v3/v2 (third impact)')
-
-plt.ylim(0, 0.6)
 plt.xlabel('# of paper pages (amount)')
 plt.ylabel('Restitutioncoefficient (ratio)')
+plt.ylim(0, 0.6)
 plt.legend()
+plt.savefig('A4_AUTOMATED_COR.png')
 plt.show()
 
-# plt.figure(4)
-# plt.plot(tijd_lijst, snelheden)
-# plt.xlim(0, 400)
-# plt.ylim(-20, 20)
 
 print(min(test_minimale_hoogte))
 print(max(test_max_snelheid))

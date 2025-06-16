@@ -7,25 +7,36 @@ import math as mt
 import matplotlib.pyplot as plt
 import csv as csv
 
+
 test_max_snelheid = []
 test_minimale_hoogte = []
-coefficienten_1_h_lijst = []
-coefficienten_2_h_lijst = []
-coefficienten_3_h_lijst = []
-coefficienten_1_v_lijst = []
-coefficienten_2_v_lijst = []
-coefficienten_3_v_lijst = []
 
-# deze heeft alle huidige met data op 1 column
-order_lijst = ["2-1", "3-1", "1-2", "2-2", "3-2", "1-4", "3-4", "1-6", "2-6", "3-6", "1-8", "3-8", "3-10", "1-12", "3-12", "1-14", "2-14", "3-14", "1-16", "2-16", "3-16", "1-30", "2-45", "2-60"]
+coefficienten_1_h_M_lijst = []
+coefficienten_2_h_M_lijst = []
+coefficienten_3_h_M_lijst = []
 
-# order_lijst = ["2-1", "2-2", "3-4", "2-6", "3-8", "3-10", "3-12", "2-14", "2-16", "1-30", "2-45", "2-60"]
+coefficienten_1_h_K_lijst = []
+coefficienten_2_h_K_lijst = []
+coefficienten_3_h_K_lijst = []
+
+coefficienten_1_v_M_lijst = []
+coefficienten_2_v_M_lijst = []
+coefficienten_3_v_M_lijst = []
+
+coefficienten_1_v_K_lijst = []
+coefficienten_2_v_K_lijst = []
+coefficienten_3_v_K_lijst = []
+
+starting_height_M = []
+starting_height_K = []
+
+
+
 a_lijst = ['M', 'K']
 b_lijst = [1, 2, 3, 4]
-papier_lijst = []
+
 for b in b_lijst:
   for a in a_lijst:
-# for o in order_lijst:
         with open(f'E:/Documents/GitHub/2025-Projects_Team-1-Bouncing-on-Paper-The-Surprising-Restitution-Coefficient-of-a-Paper-Stack-/Code/HOOGTETESTS/HT-{b}-{a}.csv', 'r') as yurr:
             hoogte_lijst = []
             tijd_lijst = []
@@ -36,14 +47,14 @@ for b in b_lijst:
                 data_opgeknipt = regel.strip().split()
 
                 if teller == 3:
-                    print('daggoe')
+                    print()
                 else:    
                     if data_opgeknipt and data_opgeknipt[0] != 'Frame':
                         if data_opgeknipt and data_opgeknipt[0] != 'Tracks':
                             if data_opgeknipt and data_opgeknipt[0] != 'Track':
                                 tijd = int(data_opgeknipt[0])
                                 y1 = float(data_opgeknipt[2])
-                                hoogte = 678.43695 - y1
+                                hoogte = 656.4737 - y1
 
                                 tijd_lijst.append(tijd)
                                 hoogte_lijst.append(hoogte)
@@ -97,66 +108,104 @@ for b in b_lijst:
             cor2_v = impact_snelheden[3] / impact_snelheden[2]
             # cor3_v = impact_snelheden[3] / impact_snelheden[2]
 
-            coefficienten_1_h_lijst.append(cor1_h)
-            coefficienten_2_h_lijst.append(cor2_h)
-            # coefficienten_3_lijst.append(cor3_h)
+            if a == 'M':
+                starting_height_M.append(maxima_hoogtes[0])
+                coefficienten_1_h_M_lijst.append(cor1_h)
+                coefficienten_2_h_M_lijst.append(cor2_h)
+                # coefficienten_3_lijst.append(cor3_h)
 
-            coefficienten_1_v_lijst.append(cor1_v)
-            coefficienten_2_v_lijst.append(cor2_v)
-            # coefficienten_3_v_lijst.append(cor3_v)
+                coefficienten_1_v_M_lijst.append(cor1_v)
+                coefficienten_2_v_M_lijst.append(cor2_v)
+                # coefficienten_3_v_lijst.append(cor3_v)
+            else:
+                starting_height_K.append(maxima_hoogtes[0])
+                coefficienten_1_h_K_lijst.append(cor1_h)
+                coefficienten_2_h_K_lijst.append(cor2_h)
+                # coefficienten_3_lijst.append(cor3_h)
 
-            plt.figure(1)
+                coefficienten_1_v_K_lijst.append(cor1_v)
+                coefficienten_2_v_K_lijst.append(cor2_v)
+                # coefficienten_3_v_lijst.append(cor3_v)
+
+            plt.figure(1, figsize=(15, 15))
+            plt.suptitle('Position and speed graphs, of different heights from both marbles (Small metal, medium blue), combined (messy)')
+            plt.subplot(311)
+            plt.title('Height over time, all measurements')
             plt.plot(tijd_lijst, hoogte_lijst)
-            plt.xlabel("Time (frames)")
+            plt.xlabel('Time (frames)')
             plt.ylabel('Height (px)')
-            # plt.ylim(0, 200)
-            # plt.show()
 
             snelheden.append(0)            
-            plt.figure(4)
+            plt.subplot(312)
+            plt.title('Speed over time, all measurements')
             plt.plot(tijd_lijst, snelheden)
+            plt.xlabel('Time (frames)')
+            plt.ylabel('Speed (px/frame)')
             plt.xlim(0, 400)
             plt.ylim(-20, 20)
+            plt.savefig('HEIGHTDIFF_POS_AND_SPEED.png', bbox_inches='tight')
 
             test_max_snelheid.append(max(snelheden))
             # print(cor1, cor2, cor3)
             test_minimale_hoogte.append(min(hoogte_lijst))
+            
             print(impact_tijden)
             print(impact_snelheden)
             print(f'File: {b}-{a}')
-            papier_lijst.append(b)
 
 # print(impact_snelheden)
 
-# papier_lijst = [1, 1, 1, 2, 2, 2, 4, 4, 4, 6, 6, 6, 8, 8, 8, 10, 10, 10, 12, 12, 12, 14, 14, 14, 16, 16, 16, 18, 18, 18, 20, 20, 20, 30, 30, 30, 40, 40, 40, 45, 45, 45, 50, 50, 50, 55, 55, 55, 60, 60, 60]
-# papier_lijst = [1, 2, 4, 6, 8, 10, 12, 14, 16, 30, 45, 60]
+papier_lijst = [1, 2, 3, 4]
 
-# plt.figure(2)
-# plt.plot(papier_lijst, coefficienten_1_h_lijst, 'o', label='h1/h0 (first bounce)')
-# plt.plot(papier_lijst, coefficienten_2_h_lijst, 'o', label='h2/h1 (second bounce)')
-# plt.plot(papier_lijst, coefficienten_3_h_lijst, label='h3/h2 (third bounce)')
+plt.figure(2, figsize=(15, 10))
+plt.suptitle('CoR against starting height, Medium (blue) marble')
+plt.subplot(321)
+plt.title('CoR calculated with height ratio (h_after_bounce / h_initial)')
+plt.plot(coefficienten_1_h_M_lijst, starting_height_M, 'o', label='h1/h0 (first bounce)')
+# plt.plot(papier_lijst, coefficienten_2_h_M_lijst, 'o', label='h2/h1 (second bounce)')
+# plt.plot(papier_lijst, coefficienten_3_h_M_lijst, label='h3/h2 (third bounce)')
 
-# plt.xlabel('# of paper pages (amount)')
-# plt.ylabel('Restitutioncoefficient (ratio)')
-# plt.legend()
-# plt.show()
+plt.xlabel('Restitutioncoefficient (ratio)')
+plt.ylabel('Starting height (px)')
+plt.legend()
 
 
-# plt.figure(3)
-# plt.plot(papier_lijst, coefficienten_1_v_lijst, 'o', label='v1/v0 (first impact)')
+plt.subplot(322)
+plt.title('CoR calculated with speed ratio (v_after_impact / v_before_impact)')
+plt.plot(coefficienten_1_v_M_lijst, starting_height_M, 'o', label='v1/v0 (first impact)')
 # plt.plot(papier_lijst, coefficienten_2_v_lijst, 'o', label='v2/v1 (second impact)')
 # plt.plot(papier_lijst, coefficienten_3_v_lijst, label='v3/v2 (third impact)')
-
 # plt.ylim(0, 0.6)
-# plt.xlabel('# of paper pages (amount)')
-# plt.ylabel('Restitutioncoefficient (ratio)')
-# plt.legend()
+plt.xlabel('Restitutioncoefficient (ratio)')
+plt.ylabel('Starting height (px)')
+plt.legend()
+plt.savefig('HEIGHTDIFF_MEDIUM_BLUE_MARBLE_COR.png')
+
+
+plt.figure(3, figsize=(20, 10))
+plt.suptitle('CoR against starting height, Small (metal) marble')
+plt.subplot(331)
+plt.title('CoR calculated with height ratio (h_after_bounce / h_initial)')
+plt.plot(coefficienten_1_h_K_lijst, starting_height_M, 'o', label='h1/h0 (first bounce)')
+# plt.plot(papier_lijst, coefficienten_2_h_M_lijst, 'o', label='h2/h1 (second bounce)')
+# plt.plot(papier_lijst, coefficienten_3_h_M_lijst, label='h3/h2 (third bounce)')
+plt.xlabel('Restitutioncoefficient (ratio)')
+plt.ylabel('Starting height (px)')
+plt.legend()
+
+
+plt.subplot(332)
+plt.title('CoR calculated with speed ratio (v_after_impact / v_before_impact)')
+plt.plot(coefficienten_1_v_K_lijst, starting_height_M, 'o', label='v1/v0 (first impact)')
+# plt.plot(papier_lijst, coefficienten_2_v_lijst, 'o', label='v2/v1 (second impact)')
+# plt.plot(papier_lijst, coefficienten_3_v_lijst, label='v3/v2 (third impact)')
+# plt.ylim(0, 0.6)
+plt.xlabel('Restitutioncoefficient (ratio)')
+plt.ylabel('Starting height (px)')
+plt.legend()
+plt.savefig('HEIGHTDIFF_SMALL_METAL_MARBLE_COR.png')
 plt.show()
 
-# plt.figure(4)
-# plt.plot(tijd_lijst, snelheden)
-# plt.xlim(0, 400)
-# plt.ylim(-20, 20)
 
 print(min(test_minimale_hoogte))
 print(max(test_max_snelheid))
