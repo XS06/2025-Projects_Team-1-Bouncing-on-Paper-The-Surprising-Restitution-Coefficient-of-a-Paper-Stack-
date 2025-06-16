@@ -110,6 +110,7 @@ class Animation(Scene):
         self.play(Write(textboven))
         self.play(FadeOut(textboven), FadeOut(texth1), FadeOut(texth2), FadeOut(lineis1), FadeOut(lineis2))
 
+        # grafiek maken
         # ax = Axes(
         #     x_range=[0,500, 50], y_range=[0,1,0.1], x_axis_config= {"numbers_to_include":[]}, y_axis_config = {"numbers_to_include":[]})
         # #labels = ax.get_axis_labels(x_label ="aantal vellen papier", y_label = "Resitutie Coëfficient (CoR)")
@@ -119,8 +120,19 @@ class Animation(Scene):
 
         #functie = assen.plot(lambda x: x**2, color=YELLOW) Hier nog eigenfunctie toepassen
 
-        #functielabel = assen.get_graph_label(functie, label="x^2")
+        #functielabel = assen.get_graph_label(functie, label="x^2") Hier nog eigen label toepassen
 
         #self.play(Create(assen))
         #self.play(Create(functie))
-       #
+
+        # arrowdal = Arrow([], [0,2,0], buff = 0) #plek nog toevoegen
+        # arrowpiek = Arrow([], [0,2,0], buff = 0) #plek nog toevoegen
+        # textdal = Text("The coefficient of restitution is lowest for x sheets")
+        # textpiek = Text("The coefficient of restitution is highest for x sheets")
+        # self.play(Create(arrowdal), Create(textdal))
+        # self.wait(2)
+        # self.play(FadeOut(arrowdal), FadeOut(textdal))
+        # self.play(Create(arrowpiek), Create(textpiek))
+
+
+
