@@ -39,7 +39,7 @@ for b in b_lijst:
   for a in a_lijst:
         with open(f'E:/Documents/GitHub/2025-Projects_Team-1-Bouncing-on-Paper-The-Surprising-Restitution-Coefficient-of-a-Paper-Stack-/Code/HOOGTETESTS/HT-{b}-{a}.csv', 'r') as yurr:
             hoogte_lijst = []
-            tijd_lijst = []
+            frame_lijst = []
             teller = 0
             stuiteraantal = 0
 
@@ -52,11 +52,11 @@ for b in b_lijst:
                     if data_opgeknipt and data_opgeknipt[0] != 'Frame':
                         if data_opgeknipt and data_opgeknipt[0] != 'Tracks':
                             if data_opgeknipt and data_opgeknipt[0] != 'Track':
-                                tijd = int(data_opgeknipt[0])
+                                frame = int(data_opgeknipt[0])
                                 y1 = float(data_opgeknipt[2])
                                 hoogte = 656.4737 - y1
 
-                                tijd_lijst.append(tijd)
+                                frame_lijst.append(frame)
                                 hoogte_lijst.append(hoogte)
                             else:
                                 teller +=1
@@ -69,31 +69,31 @@ for b in b_lijst:
             # Snelheden berekenen (voor bepaling van toppen)
             snelheden = []
 
-            for i in range(1, len(hoogte_lijst)):
+            for i in range(0, len(hoogte_lijst)):
                 dy = hoogte_lijst[i] - hoogte_lijst[i - 1]
-                dt = tijd_lijst[i] - tijd_lijst[i - 1]
+                dt = frame_lijst[i] - frame_lijst[i - 1]
                 snelheid = dy / dt if dt != 0 else 0
                 snelheden.append(snelheid)
 
 
             # Toppen detecteren: waar snelheid verandert van positief naar negatief
-            maxima_tijden = [0]
-            impact_tijden = []
+            maxima_frames = [0]
+            impact_frames = []
             impact_snelheden = []
-            for i in range(1, len(snelheden)):
-                if snelheden[i - 1] > 0 and snelheden[i] < 0 and len(maxima_tijden) <= 3 and i > 30:  # filter op realistische waarde
-                    maxima_tijden.append(i)
-                if snelheden[i - 1] < 0 and snelheden[i] > 0 and len(impact_snelheden) <= 3 and i > 30:
-                    impact_snelheden.append(abs(snelheden[i - 1]))
-                    impact_snelheden.append(snelheden[i])
-                    impact_tijden.append(i - 1)
-                    impact_tijden.append(i)
+            for i in range(0, len(snelheden)):
+                if snelheden[i - 1] > 0 and snelheden[i] < 0 and len(maxima_frames) <= 3 and i > 20:  # filter op realistische waarde
+                    maxima_frames.append(i)
+                if snelheden[i - 1] < 0 and snelheden[i] > 0 and len(impact_snelheden) <= 3 and i > 20:
+                    impact_snelheden.append(abs(snelheden[i - 4]))
+                    impact_snelheden.append(snelheden[i + 1])
+                    impact_frames.append(i - 4)
+                    impact_frames.append(i + 1)
 
-            print(f'maximum points zijn {maxima_tijden}')
+            print(f'maximum points zijn {maxima_frames}')
 
 
             # Hoogtes van de toppen
-            maxima_hoogtes = [hoogte_lijst[i] for i in maxima_tijden]
+            maxima_hoogtes = [hoogte_lijst[i] for i in maxima_frames]
             # print(maxima_hoogtes)
 
 
@@ -131,14 +131,13 @@ for b in b_lijst:
             plt.suptitle('Position and speed graphs, of different heights from both marbles (Small metal, medium blue), combined (messy)')
             plt.subplot(311)
             plt.title('Height over time, all measurements')
-            plt.plot(tijd_lijst, hoogte_lijst)
+            plt.plot(frame_lijst, hoogte_lijst)
             plt.xlabel('Time (frames)')
             plt.ylabel('Height (px)')
-
-            snelheden.append(0)            
+          
             plt.subplot(312)
             plt.title('Speed over time, all measurements')
-            plt.plot(tijd_lijst, snelheden)
+            plt.plot(frame_lijst, snelheden)
             plt.xlabel('Time (frames)')
             plt.ylabel('Speed (px/frame)')
             plt.xlim(0, 400)
@@ -149,7 +148,7 @@ for b in b_lijst:
             # print(cor1, cor2, cor3)
             test_minimale_hoogte.append(min(hoogte_lijst))
             
-            print(impact_tijden)
+            print(impact_frames)
             print(impact_snelheden)
             print(f'File: {b}-{a}')
 

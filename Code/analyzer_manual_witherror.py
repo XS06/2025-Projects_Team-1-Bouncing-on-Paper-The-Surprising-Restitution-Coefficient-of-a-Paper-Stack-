@@ -2,10 +2,8 @@
 # Studentnummer: 15817490
 
 import numpy as np
-import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt\
 
-from lmfit import models
-from lmfit import Model
 from scipy import stats
 import numpy as np
 import math as mt
@@ -21,7 +19,7 @@ a_lijst = [1, 2, 3]
 b_lijst = [1, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 30, 40, 45, 50, 55, 60]
 #for b in b_lijst:
 #    for a in a_lijst:
-with open(f'/Users/noor/Documents/GitHub/2025-Projects_Team-1-Bouncing-on-Paper-The-Surprising-Restitution-Coefficient-of-a-Paper-Stack-/Code/1-1-M.csv', 'r') as yurr:
+with open(f'E:/Documents/GitHub/2025-Projects_Team-1-Bouncing-on-Paper-The-Surprising-Restitution-Coefficient-of-a-Paper-Stack-/Code/A4 Medium knikker (blauw)/1-1-M.csv', 'r') as yurr:
     hoogte_lijst = []
     frame_lijst = []
     teller = 0
@@ -40,7 +38,7 @@ with open(f'/Users/noor/Documents/GitHub/2025-Projects_Team-1-Bouncing-on-Paper-
                     if data_opgeknipt and data_opgeknipt[0] != 'Track':
                         if frame >= 29:
                             frame = int(data_opgeknipt[0])
-                            y1 = float(data_opgeknipt[4])
+                            y1 = float(data_opgeknipt[2])
                             hoogte = 1000 - y1
 
                             frame_lijst.append(frame)
