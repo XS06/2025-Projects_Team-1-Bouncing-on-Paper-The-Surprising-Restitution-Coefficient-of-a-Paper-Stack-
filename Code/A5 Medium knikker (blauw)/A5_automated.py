@@ -37,7 +37,7 @@ for b in b_lijst:
     for a in a_lijst:
         papier_lijst.append(b)
         # for h in h_lijst:
-        with open(f'E:/Documents/GitHub/2025-Projects_Team-1-Bouncing-on-Paper-The-Surprising-Restitution-Coefficient-of-a-Paper-Stack-/Code/A5 Medium knikker (blauw)/{a}-{b}-B-A5.csv', 'r') as yurr:
+        with open(f'E:/Documents/GitHub/2025-Projects_Team-1-Bouncing-on-Paper-The-Surprising-Restitution-Coefficient-of-a-Paper-Stack-/Code/A5 Medium knikker (blauw)/{a}-{b}-O-A5.csv', 'r') as yurr:
             hoogte_lijst = []
             frame_lijst = []
             frame_delta = 0
@@ -55,7 +55,7 @@ for b in b_lijst:
                     if data_opgeknipt and data_opgeknipt[0] != 'Frame':
                         if data_opgeknipt and data_opgeknipt[0] != 'Tracks':
                             if data_opgeknipt and data_opgeknipt[0] != 'Track':
-                                if float(data_opgeknipt[2]) < 60:
+                                if float(data_opgeknipt[2]) < 300:
                                     frame_delta = int(data_opgeknipt[0])
                                     if float(data_opgeknipt[2]) < delta_hoogte:
                                         delta_hoogte = float(data_opgeknipt[2])
@@ -91,10 +91,10 @@ for b in b_lijst:
             impact_frames = []
             impact_snelheden = []
             for i in range(0, len(snelheden)):
-                if snelheden[i - 1] > 0 and snelheden[i] < 0 and len(maxima_frames) <= 3 and i > 40:  # filter op realistische waarde
+                if snelheden[i - 1] > 0 and snelheden[i] < 0 and len(maxima_frames) <= 3 and i > 20:  # filter op realistische waarde
                     maxima_frames.append(i)
                     maxima_hoogtes.append(hoogte_lijst[i])
-                if snelheden[i - 1] < 0 and snelheden[i] > 0 and len(impact_snelheden) <= 3 and i > 40:
+                if snelheden[i - 1] < 0 and snelheden[i] > 0 and len(impact_snelheden) <= 3 and i > 20:
                     impact_snelheden.append(abs(snelheden[i - 4]))
                     impact_snelheden.append(snelheden[i + 1])
                     impact_frames.append(i - 4)
@@ -155,7 +155,7 @@ for b in b_lijst:
         
         print(impact_frames)
         print(impact_snelheden)
-        print(f'File: {a}-{b}-B')
+        print(f'File: {a}-{b}-O')
 
 # print(impact_snelheden)
 
@@ -164,7 +164,7 @@ plt.figure(2, figsize=(15, 10))
 plt.suptitle('A5 Format. CoR against amount of paper pages, with "high" starting height (same starting height as A4 format measurements), all measurements')
 plt.subplot(221)
 plt.title('CoR calculated with height ratio (h_after_bounce / h_initial)')
-plt.plot(papier_lijst, coefficienten_1_h_B_lijst, 'o', label='h1/h0 (first bounce)')
+plt.plot(papier_lijst, coefficienten_1_h_B_lijst, 'o', label='h1/h0 (first bounce)', markersize= '3')
 # plt.plot(papier_lijst, coefficienten_2_h_B_lijst, 'o', label='h2/h1 (second bounce)')
 # plt.plot(papier_lijst, coefficienten_3_h_lijst, label='h3/h2 (third bounce)')
 plt.xlabel('# of paper pages (amount)')
@@ -174,14 +174,14 @@ plt.legend()
 
 plt.subplot(222)
 plt.title('CoR calculated with speed ratio (v_after_impact / v_before_impact)')
-plt.plot(papier_lijst, coefficienten_1_v_B_lijst, 'o', label='v1/v0 (first impact)')
+plt.plot(papier_lijst, coefficienten_1_v_B_lijst, 'o', label='v1/v0 (first impact)', markersize= '3')
 # plt.plot(papier_lijst, coefficienten_2_v_B_lijst, 'o', label='v2/v1 (second impact)')
 # plt.plot(papier_lijst, coefficienten_3_v_lijst, label='v3/v2 (third impact)')
 # plt.ylim(0, 0.6)
 plt.xlabel('# of paper pages (amount)')
 plt.ylabel('Restitutioncoefficient (ratio)')
 plt.legend()
-plt.savefig('A5_AUTOMATED_COR_HIGH.png')
+plt.savefig('A5_AUTOMATED_COR_LOW.png')
 plt.show()
 
 
