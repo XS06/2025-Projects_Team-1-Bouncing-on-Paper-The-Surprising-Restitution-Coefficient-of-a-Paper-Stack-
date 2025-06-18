@@ -110,7 +110,7 @@ with open(f'E:/Documents/GitHub/2025-Projects_Team-1-Bouncing-on-Paper-The-Surpr
             maxima_tijden.append(tijd_lijst[i])
             schatting_max_hoogte = hoogte_lijst[i-1] + (snelheden_lijst[i - 1]/(snelheden_lijst[i - 1] - snelheden_lijst[i])) * (hoogte_lijst[i] - hoogte_lijst[i-1])
             schatting_max_tijd = tijd_lijst[i - 1] + (snelheden_lijst[i - 1]/(snelheden_lijst[i - 1] - snelheden_lijst[i])) * 0.005
-            fout_maximale_hoogte= ((1-(snelheden_lijst[i-1]/(snelheden_lijst[i-1]-snelheden_lijst[i])))**2 *(fout_hoogte_lijst[i-1])**2 + (snelheden_lijst[i-1]/(snelheden_lijst[i-1]-snelheden_lijst[i]))**2 * (fout_hoogte_lijst[i])**2 ((snelheden_lijst[i]*(hoogte_lijst[i] - hoogte_lijst[i-1]))/((snelheden_lijst[i-1] - snelheden_lijst[i])**2))**2 * (fout_snelheden_lijst[i-1])**2 + ((snelheden_lijst[i-1]* (hoogte_lijst[i]-hoogte_lijst[i-1]))/((snelheden_lijst[i-1]-snelheden_lijst[i])**2))**2 * (fout_snelheden_lijst[i])**2)**0.5
+            fout_maximale_hoogte= ((1-(snelheden_lijst[i-1]/(snelheden_lijst[i-1]-snelheden_lijst[i])))**2 * (fout_hoogte_lijst[i-1])**2 + (snelheden_lijst[i-1]/(snelheden_lijst[i-1]-snelheden_lijst[i]))**2 * (fout_hoogte_lijst[i])**2 + ((snelheden_lijst[i]*(hoogte_lijst[i] - hoogte_lijst[i-1]))/((snelheden_lijst[i-1] - snelheden_lijst[i])**2))**2 * (fout_snelheden_lijst[i-1])**2 + ((snelheden_lijst[i-1]* (hoogte_lijst[i]-hoogte_lijst[i-1]))/((snelheden_lijst[i-1]-snelheden_lijst[i])**2))**2 * (fout_snelheden_lijst[i])**2) **0.5
             maxima_tijden_schatting.append(schatting_max_tijd)
             maxima_hoogte_schatting.append(schatting_max_hoogte)
 
