@@ -24,7 +24,7 @@ A4_papier_lijst = []
 
 for b in b_lijst:
   for a in a_lijst:
-        with open(f'E:/Documents/GitHub/2025-Projects_Team-1-Bouncing-on-Paper-The-Surprising-Restitution-Coefficient-of-a-Paper-Stack-/Code/A4 Medium knikker (blauw)/{a}-{b}-M.csv', 'r') as yurr:
+        with open(f'C:/Users/salad/Documents/GitHub/2025-Projects_Team-1-Bouncing-on-Paper-The-Surprising-Restitution-Coefficient-of-a-Paper-Stack-/Code/A4 Medium knikker (blauw)/{a}-{b}-M.csv', 'r') as yurr:
             hoogte_lijst = []
             frame_lijst = []
             frame_delta = 0
@@ -125,7 +125,8 @@ for b in b_lijst:
 
             print(f'maximum points zijn {maxima_frames}')
             print(f'maximum hoogtes zijn {maxima_hoogtes}')
-
+            print(f'impact frames are {impact_frames}')
+            print(f'impact speeds are {impact_snelheden}')
 
             # Restitutiecoëfficiënten berekenen: hoogte_n / hoogte_(n-1)
             cor1_h = maxima_hoogtes[1] / maxima_hoogtes[0]
@@ -133,7 +134,7 @@ for b in b_lijst:
 
             cor1_v = impact_snelheden[1] / impact_snelheden[0]
             fout_cor1_v = cor1_v * ((fout_snelheden[impact_frames[1]]/impact_tijd_schatting[1])**2 + (fout_snelheden[impact_frames[0]]/impact_tijd_schatting[0])**2)**0.5
-
+            
             A4_coefficienten_1_h_lijst.append(cor1_h)
             A4_fout_coefficienten_1_h_lijst.append(fout_cor1_h)
 
@@ -199,7 +200,7 @@ for b in b_lijst:
     for a in a_lijst:
         A5_papier_lijst.append(b)
         # for h in h_lijst:
-        with open(f'E:/Documents/GitHub/2025-Projects_Team-1-Bouncing-on-Paper-The-Surprising-Restitution-Coefficient-of-a-Paper-Stack-/Code/A5 Medium knikker (blauw)/{a}-{b}-B-A5.csv', 'r') as yurr:
+        with open(f'C:/Users/salad/Documents/GitHub/2025-Projects_Team-1-Bouncing-on-Paper-The-Surprising-Restitution-Coefficient-of-a-Paper-Stack-/Code/A5 Medium knikker (blauw)/{a}-{b}-B-A5.csv', 'r') as yurr:
             hoogte_lijst = []
             frame_lijst = []
             frame_delta = 0
@@ -301,6 +302,8 @@ for b in b_lijst:
 
             print(f'maximum points zijn {maxima_frames}')
             print(f'maximum hoogtes zijn {maxima_hoogtes}')
+            print(f'impact frames are {impact_frames}')
+            print(f'impact speeds are {impact_snelheden}')
 
 
             # Restitutiecoëfficiënten berekenen: hoogte_n / hoogte_(n-1)
@@ -354,7 +357,7 @@ plt.suptitle('A4 and A5 combined. CoR against amount of paper pages, all measure
 plt.subplot(321)
 plt.title('CoR calculated with height ratio (h_after_bounce / h_initial)')
 plt.errorbar(A4_papier_lijst, A4_coefficienten_1_h_lijst, yerr=A4_fout_coefficienten_1_h_lijst, capsize=3, fmt='o', ecolor = "black", label='A4, h1/h0 (first bounce)', markersize = '3')
-plt.errorbar(A5_papier_lijst, A5_coefficienten_1_h_B_lijst, yerr=A5_fout_coefficienten_1_h_B_lijst, capsize=3, fmt='o', ecolor = "black", label='A5, h1/h0 (first bounce)', markersize = '3')
+# plt.errorbar(A5_papier_lijst, A5_coefficienten_1_h_B_lijst, yerr=A5_fout_coefficienten_1_h_B_lijst, capsize=3, fmt='o', ecolor = "black", label='A5, h1/h0 (first bounce)', markersize = '3')
 plt.xlabel('# of paper pages (amount)')
 plt.ylabel('Restitutioncoefficient (ratio)')
 # plt.ylim(0, 0.6)
@@ -363,7 +366,7 @@ plt.legend()
 plt.subplot(322)
 plt.title('CoR calculated with speed ratio (v_after_impact / v_before_impact)')
 plt.errorbar(A4_papier_lijst, A4_coefficienten_1_v_lijst, yerr=A4_fout_coefficienten_1_v_lijst, capsize=3, fmt='o', ecolor = "black", label='A4, v1/v0 (first impact)', markersize= '3')
-plt.errorbar(A5_papier_lijst, A5_coefficienten_1_v_B_lijst, yerr=A5_fout_coefficienten_1_v_B_lijst, capsize=3, fmt='o', ecolor = "black", label='A5, v1/v0 (first impact)', markersize= '3')
+# plt.errorbar(A5_papier_lijst, A5_coefficienten_1_v_B_lijst, yerr=A5_fout_coefficienten_1_v_B_lijst, capsize=3, fmt='o', ecolor = "black", label='A5, v1/v0 (first impact)', markersize= '3')
 # plt.ylim(0, 0.6)
 plt.xlabel('# of paper pages (amount)')
 plt.ylabel('Restitutioncoefficient (ratio)')

@@ -27,7 +27,7 @@ for b in b_lijst:
     for a in a_lijst:
         papier_lijst.append(b)
         # for h in h_lijst:
-        with open(f'E:/Documents/GitHub/2025-Projects_Team-1-Bouncing-on-Paper-The-Surprising-Restitution-Coefficient-of-a-Paper-Stack-/Code/A5 Medium knikker (blauw)/{a}-{b}-O-A5.csv', 'r') as yurr:
+        with open(f'C:/Users/salad/Documents/GitHub/2025-Projects_Team-1-Bouncing-on-Paper-The-Surprising-Restitution-Coefficient-of-a-Paper-Stack-/Code/A5 Medium knikker (blauw)/{a}-{b}-O-A5.csv', 'r') as yurr:
             hoogte_lijst = []
             frame_lijst = []
             frame_delta = 0
@@ -106,8 +106,10 @@ for b in b_lijst:
             impact_frames = []
             impact_snelheden = []
             impact_tijd_schatting = []
+            speeds_around_impact = []
+
             for i in range(0, len(snelheden)):
-                if snelheden[i - 1] > 0 and snelheden[i] < 0 and len(maxima_frames) <= 3 and i > 40:  # filter op realistische waarde
+                if snelheden[i - 1] > 0 and snelheden[i] < 0 and len(maxima_frames) <= 3 and i > 20:  # filter op realistische waarde
                     maxima_frames.append(i)
                     maxima_hoogtes.append(hoogte_lijst[i])
                     schatting_max_hoogte = hoogte_lijst[i-1] + (snelheden[i - 1]/(snelheden[i - 1] - snelheden[i])) * (hoogte_lijst[i] - hoogte_lijst[i-1])
@@ -116,7 +118,7 @@ for b in b_lijst:
                     maxima_tijden_schatting.append(schatting_max_tijd)
                     maxima_hoogte_schatting.append(schatting_max_hoogte)
                     fout_maxima_hoogte.append(fout_maximale_hoogte)                    
-                if snelheden[i - 1] < 0 and snelheden[i] > 0 and len(impact_snelheden) <= 3 and i > 40:
+                if snelheden[i - 1] < 0 and snelheden[i] > 0 and len(impact_snelheden) <= 3 and i > 20:
                     impact_snelheden.append(abs(snelheden[i - 4]))
                     impact_snelheden.append(snelheden[i + 1])
                     impact_frames.append(i - 4)
@@ -128,11 +130,17 @@ for b in b_lijst:
 
             print(f'maximum points zijn {maxima_frames}')
             print(f'maximum hoogtes zijn {maxima_hoogtes}')
+            print(f'impact frames zijn {impact_frames}')
+            print(f'impact speeds are {impact_snelheden}')
+            print(f'Speeds around impact are ')
+
 
 
             # Restitutiecoëfficiënten berekenen: hoogte_n / hoogte_(n-1)
             cor1_h = maxima_hoogtes[1] / maxima_hoogtes[0]
             fout_cor1_h = cor1_h * ((fout_maxima_hoogte[1]/maxima_hoogte_schatting[1])**2 + (fout_maxima_hoogte[0]/maxima_hoogte_schatting[0])**2)**0.5
+            cor2_h = maxima_hoogtes[2] / maxima_hoogtes[1]
+            cor3_h = maxima_hoogtes[3] / maxima_hoogtes[2]
 
             cor1_v = impact_snelheden[1] / impact_snelheden[0]
             fout_cor1_v = cor1_v * ((fout_snelheden[impact_frames[1]]/impact_tijd_schatting[1])**2 + (fout_snelheden[impact_frames[0]]/impact_tijd_schatting[0])**2)**0.5
@@ -149,33 +157,32 @@ for b in b_lijst:
 
             #     coefficienten_1_v_O_lijst.append(cor1_v)
 
-        plt.figure(1, figsize=(15, 15))
-        plt.suptitle('A5 Format. Position and speed graphs, of all measurements combined (messy)')
-        plt.subplot(211)
-        plt.title('Height over time, all measurements')
-        plt.plot(frame_lijst, hoogte_lijst)
-        plt.xlabel('Time (frames)')
-        plt.ylabel('Height (px)')
-        
-        plt.subplot(212)
-        plt.title('Speed over time, all measurements')
-        plt.plot(frame_lijst, snelheden)
-        plt.xlabel('Time (frames)')
-        plt.ylabel('Speed (px/frame)')
-        # plt.xlim(0, 400)
-        # plt.ylim(-20, 20)
-        plt.savefig('A5_AUTOMATED_POS_AND_SPEED.png')
+            plt.figure(1, figsize=(15, 15))
+            plt.suptitle('A5 Format. Position and speed graphs, of all measurements combined (messy)')
+            plt.subplot(211)
+            plt.title('Height over time, all measurements')
+            plt.plot(frame_lijst, hoogte_lijst)
+            plt.xlabel('Time (frames)')
+            plt.ylabel('Height (px)')
 
-        test_max_snelheid.append(max(snelheden))
-        # print(cor1, cor2, cor3)
-        test_minimale_hoogte.append(min(hoogte_lijst))
-        
-        print(impact_frames)
-        print(impact_snelheden)
-        print(f'File: {a}-{b}-O')
+            plt.subplot(212)
+            plt.title('Speed over time, all measurements')
+            plt.plot(frame_lijst, np.abs(snelheden))
+            plt.xlabel('Time (frames)')
+            plt.ylabel('Speed (px/frame)')
+            # plt.xlim(0, 400)
+            # plt.ylim(-20, 20)
+            plt.savefig('A5_AUTOMATED_POS_AND_SPEED.png')
+
+test_max_snelheid.append(max(snelheden))
+# print(cor1, cor2, cor3)
+test_minimale_hoogte.append(min(hoogte_lijst))
+
+print(impact_frames)
+print(impact_snelheden)
+# print(f'File: {a}-{b}-O')
 
 # print(impact_snelheden)
-
 
 plt.figure(2, figsize=(15, 10))
 plt.suptitle('A5 Format. CoR against amount of paper pages, with "low" starting height (half of starting height from A4/A5 "high" measurements), all measurements')
@@ -189,7 +196,8 @@ plt.legend()
 
 plt.subplot(222)
 plt.title('CoR calculated with speed ratio (v_after_impact / v_before_impact)')
-plt.errorbar(papier_lijst, coefficienten_1_v_B_lijst, yerr=fout_coefficienten_1_v_B_lijst, capsize=3, fmt='o', ecolor = "black", label='v1/v0 (first impact)', markersize= '3', color='darkorange')
+# plt.errorbar(papier_lijst, coefficienten_1_v_B_lijst, yerr=fout_coefficienten_1_v_B_lijst, capsize=3, fmt='o', ecolor = "black", label='v1/v0 (first impact)', markersize= '3', color='darkorange')
+plt.plot(papier_lijst, coefficienten_1_v_B_lijst, 'o')
 # plt.ylim(0, 0.6)
 plt.xlabel('# of paper pages (amount)')
 plt.ylabel('Restitutioncoefficient (ratio)')
@@ -224,10 +232,10 @@ print(min(test_minimale_hoogte))
 print(max(test_max_snelheid))
 
 
-with open('E:/Documents/GitHub/2025-Projects_Team-1-Bouncing-on-Paper-The-Surprising-Restitution-Coefficient-of-a-Paper-Stack-/Code/A5_O_sanitized_data.csv', 'w', newline='') as A5writer:
-    writer = csv.writer(A5writer)
-    header = ["A5_papier_lijst", "A5_coefficienten_1_h_O_lijst", "A5_fout_coefficienten_1_h_O_lijst", "A5_coefficienten_1_v_O_lijst", "A5_fout_coefficienten_1_v_O_lijst"]
+# with open('E:/Documents/GitHub/2025-Projects_Team-1-Bouncing-on-Paper-The-Surprising-Restitution-Coefficient-of-a-Paper-Stack-/Code/A5_O_sanitized_data.csv', 'w', newline='') as A5writer:
+#     writer = csv.writer(A5writer)
+#     header = ["A5_papier_lijst", "A5_coefficienten_1_h_O_lijst", "A5_fout_coefficienten_1_h_O_lijst", "A5_coefficienten_1_v_O_lijst", "A5_fout_coefficienten_1_v_O_lijst"]
 
-    writer.writerow(header)
-    for i in range(0, len(papier_lijst)):
-        writer.writerow([papier_lijst[i], coefficienten_1_h_B_lijst[i], fout_coefficienten_1_h_B_lijst[i], coefficienten_1_v_B_lijst[i], fout_coefficienten_1_v_B_lijst[i]])
+#     writer.writerow(header)
+#     for i in range(0, len(papier_lijst)):
+#         writer.writerow([papier_lijst[i], coefficienten_1_h_B_lijst[i], fout_coefficienten_1_h_B_lijst[i], coefficienten_1_v_B_lijst[i], fout_coefficienten_1_v_B_lijst[i]])
