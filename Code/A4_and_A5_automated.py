@@ -24,7 +24,7 @@ A4_papier_lijst = []
 
 for b in b_lijst:
   for a in a_lijst:
-        with open(f'C:/Users/salad/Documents/GitHub/2025-Projects_Team-1-Bouncing-on-Paper-The-Surprising-Restitution-Coefficient-of-a-Paper-Stack-/Code/A4 Medium knikker (blauw)/{a}-{b}-M.csv', 'r') as yurr:
+        with open(f'E:/Documents/GitHub/2025-Projects_Team-1-Bouncing-on-Paper-The-Surprising-Restitution-Coefficient-of-a-Paper-Stack-/Code/A4 Medium knikker (blauw)/{a}-{b}-M.csv', 'r') as yurr:
             hoogte_lijst = []
             frame_lijst = []
             frame_delta = 0
@@ -102,6 +102,7 @@ for b in b_lijst:
             impact_frames = []
             impact_snelheden = []
             impact_tijd_schatting = []
+            
 
             for i in range(0, len(snelheden)):
                 if snelheden[i - 1] > 0 and snelheden[i] < 0 and len(maxima_frames) <= 3 and i > 20:  # filter op realistische waarde
@@ -118,9 +119,9 @@ for b in b_lijst:
                     impact_snelheden.append(snelheden[i + 1])
                     impact_frames.append(i - 4)
                     impact_frames.append(i + 1)
-                    schatting_impact_tijd = tijd_lijst[i - 4] + (snelheden[i - 4]/(snelheden[i - 4] - snelheden[i - 3])) * 0.005
+                    schatting_impact_tijd = tijd_lijst[i - 4] + (snelheden[i - 4]/(snelheden[i - 4] - snelheden[i - 3])) * 0.5
                     impact_tijd_schatting.append(schatting_impact_tijd)
-                    schatting_impact_tijd = tijd_lijst[i + 1] + (snelheden[i + 1]/(snelheden[i + 1] - snelheden[i +  2])) * 0.005
+                    schatting_impact_tijd = tijd_lijst[i + 1] + (snelheden[i + 1]/(snelheden[i + 1] - snelheden[i +  2])) * 0.5
                     impact_tijd_schatting.append(schatting_impact_tijd)
 
             print(f'maximum points zijn {maxima_frames}')
@@ -133,7 +134,7 @@ for b in b_lijst:
             fout_cor1_h = cor1_h * ((fout_maxima_hoogte[1]/maxima_hoogte_schatting[1])**2 + (fout_maxima_hoogte[0]/maxima_hoogte_schatting[0])**2)**0.5
 
             cor1_v = impact_snelheden[1] / impact_snelheden[0]
-            fout_cor1_v = cor1_v * ((fout_snelheden[impact_frames[1]]/impact_tijd_schatting[1])**2 + (fout_snelheden[impact_frames[0]]/impact_tijd_schatting[0])**2)**0.5
+            fout_cor1_v = cor1_v * ((fout_snelheden[impact_frames[1]]/impact_frames[1])**2 + (fout_snelheden[impact_frames[0]]/impact_frames[0])**2)**0.5
             
             A4_coefficienten_1_h_lijst.append(cor1_h)
             A4_fout_coefficienten_1_h_lijst.append(fout_cor1_h)
@@ -200,7 +201,7 @@ for b in b_lijst:
     for a in a_lijst:
         A5_papier_lijst.append(b)
         # for h in h_lijst:
-        with open(f'C:/Users/salad/Documents/GitHub/2025-Projects_Team-1-Bouncing-on-Paper-The-Surprising-Restitution-Coefficient-of-a-Paper-Stack-/Code/A5 Medium knikker (blauw)/{a}-{b}-B-A5.csv', 'r') as yurr:
+        with open(f'E:/Documents/GitHub/2025-Projects_Team-1-Bouncing-on-Paper-The-Surprising-Restitution-Coefficient-of-a-Paper-Stack-/Code/A5 Medium knikker (blauw)/{a}-{b}-B-A5.csv', 'r') as yurr:
             hoogte_lijst = []
             frame_lijst = []
             frame_delta = 0
@@ -311,7 +312,7 @@ for b in b_lijst:
             fout_cor1_h = cor1_h * ((fout_maxima_hoogte[1]/maxima_hoogte_schatting[1])**2 + (fout_maxima_hoogte[0]/maxima_hoogte_schatting[0])**2)**0.5
 
             cor1_v = impact_snelheden[1] / impact_snelheden[0]
-            fout_cor1_v = cor1_v * ((fout_snelheden[impact_frames[1]]/impact_tijd_schatting[1])**2 + (fout_snelheden[impact_frames[0]]/impact_tijd_schatting[0])**2)**0.5
+            fout_cor1_v = cor1_v * ((fout_snelheden[impact_frames[1]]/impact_frames[1])**2 + (fout_snelheden[impact_frames[0]]/impact_frames[0])**2)**0.5
 
             # if h == 'B':
             A5_coefficienten_1_h_B_lijst.append(cor1_h)
@@ -357,7 +358,7 @@ plt.suptitle('A4 and A5 combined. CoR against amount of paper pages, all measure
 plt.subplot(321)
 plt.title('CoR calculated with height ratio (h_after_bounce / h_initial)')
 plt.errorbar(A4_papier_lijst, A4_coefficienten_1_h_lijst, yerr=A4_fout_coefficienten_1_h_lijst, capsize=3, fmt='o', ecolor = "black", label='A4, h1/h0 (first bounce)', markersize = '3')
-# plt.errorbar(A5_papier_lijst, A5_coefficienten_1_h_B_lijst, yerr=A5_fout_coefficienten_1_h_B_lijst, capsize=3, fmt='o', ecolor = "black", label='A5, h1/h0 (first bounce)', markersize = '3')
+plt.errorbar(A5_papier_lijst, A5_coefficienten_1_h_B_lijst, yerr=A5_fout_coefficienten_1_h_B_lijst, capsize=3, fmt='o', ecolor = "black", label='A5, h1/h0 (first bounce)', markersize = '3')
 plt.xlabel('# of paper pages (amount)')
 plt.ylabel('Restitutioncoefficient (ratio)')
 # plt.ylim(0, 0.6)
@@ -366,7 +367,7 @@ plt.legend()
 plt.subplot(322)
 plt.title('CoR calculated with speed ratio (v_after_impact / v_before_impact)')
 plt.errorbar(A4_papier_lijst, A4_coefficienten_1_v_lijst, yerr=A4_fout_coefficienten_1_v_lijst, capsize=3, fmt='o', ecolor = "black", label='A4, v1/v0 (first impact)', markersize= '3')
-# plt.errorbar(A5_papier_lijst, A5_coefficienten_1_v_B_lijst, yerr=A5_fout_coefficienten_1_v_B_lijst, capsize=3, fmt='o', ecolor = "black", label='A5, v1/v0 (first impact)', markersize= '3')
+plt.errorbar(A5_papier_lijst, A5_coefficienten_1_v_B_lijst, yerr=A5_fout_coefficienten_1_v_B_lijst, capsize=3, fmt='o', ecolor = "black", label='A5, v1/v0 (first impact)', markersize= '3')
 # plt.ylim(0, 0.6)
 plt.xlabel('# of paper pages (amount)')
 plt.ylabel('Restitutioncoefficient (ratio)')
@@ -400,13 +401,6 @@ plt.show()
 print(min(A5_test_minimale_hoogte))
 print(max(A5_test_max_snelheid))
 
-
-# with open(f'E:/Documents/GitHub/2025-Projects_Team-1-Bouncing-on-Paper-The-Surprising-Restitution-Coefficient-of-a-Paper-Stack-/Code/A4_sanitized_data.csv', 'w'):
-# matrix = []
-# for i in range(0, len(A4_papier_lijst)):
-#     matrix.append([A4_papier_lijst[i], A4_coefficienten_1_h_lijst[i]])
-
-# print(matrix)
 
 import csv
 

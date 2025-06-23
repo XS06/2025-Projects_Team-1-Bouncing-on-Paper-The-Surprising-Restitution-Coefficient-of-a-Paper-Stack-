@@ -27,7 +27,7 @@ for b in b_lijst:
     for a in a_lijst:
         papier_lijst.append(b)
         # for h in h_lijst:
-        with open(f'C:/Users/salad/Documents/GitHub/2025-Projects_Team-1-Bouncing-on-Paper-The-Surprising-Restitution-Coefficient-of-a-Paper-Stack-/Code/A5 Medium knikker (blauw)/{a}-{b}-O-A5.csv', 'r') as yurr:
+        with open(f'E:/Documents/GitHub/2025-Projects_Team-1-Bouncing-on-Paper-The-Surprising-Restitution-Coefficient-of-a-Paper-Stack-/Code/A5 Medium knikker (blauw)/{a}-{b}-O-A5.csv', 'r') as yurr:
             hoogte_lijst = []
             frame_lijst = []
             frame_delta = 0
@@ -143,7 +143,7 @@ for b in b_lijst:
             cor3_h = maxima_hoogtes[3] / maxima_hoogtes[2]
 
             cor1_v = impact_snelheden[1] / impact_snelheden[0]
-            fout_cor1_v = cor1_v * ((fout_snelheden[impact_frames[1]]/impact_tijd_schatting[1])**2 + (fout_snelheden[impact_frames[0]]/impact_tijd_schatting[0])**2)**0.5
+            fout_cor1_v = cor1_v * ((fout_snelheden[impact_frames[1]]/impact_frames[1])**2 + (fout_snelheden[impact_frames[0]]/impact_frames[1])**2)**0.5
 
             # if h == 'B':
             coefficienten_1_h_B_lijst.append(cor1_h)
@@ -196,8 +196,8 @@ plt.legend()
 
 plt.subplot(222)
 plt.title('CoR calculated with speed ratio (v_after_impact / v_before_impact)')
-# plt.errorbar(papier_lijst, coefficienten_1_v_B_lijst, yerr=fout_coefficienten_1_v_B_lijst, capsize=3, fmt='o', ecolor = "black", label='v1/v0 (first impact)', markersize= '3', color='darkorange')
-plt.plot(papier_lijst, coefficienten_1_v_B_lijst, 'o')
+plt.errorbar(papier_lijst, coefficienten_1_v_B_lijst, yerr=fout_coefficienten_1_v_B_lijst, capsize=3, fmt='o', ecolor = "black", label='v1/v0 (first impact)', markersize= '3', color='darkorange')
+# plt.plot(papier_lijst, coefficienten_1_v_B_lijst, 'o')
 # plt.ylim(0, 0.6)
 plt.xlabel('# of paper pages (amount)')
 plt.ylabel('Restitutioncoefficient (ratio)')
@@ -232,10 +232,10 @@ print(min(test_minimale_hoogte))
 print(max(test_max_snelheid))
 
 
-# with open('E:/Documents/GitHub/2025-Projects_Team-1-Bouncing-on-Paper-The-Surprising-Restitution-Coefficient-of-a-Paper-Stack-/Code/A5_O_sanitized_data.csv', 'w', newline='') as A5writer:
-#     writer = csv.writer(A5writer)
-#     header = ["A5_papier_lijst", "A5_coefficienten_1_h_O_lijst", "A5_fout_coefficienten_1_h_O_lijst", "A5_coefficienten_1_v_O_lijst", "A5_fout_coefficienten_1_v_O_lijst"]
+with open('E:/Documents/GitHub/2025-Projects_Team-1-Bouncing-on-Paper-The-Surprising-Restitution-Coefficient-of-a-Paper-Stack-/Code/A5_O_sanitized_data.csv', 'w', newline='') as A5writer:
+    writer = csv.writer(A5writer)
+    header = ["A5_papier_lijst", "A5_coefficienten_1_h_O_lijst", "A5_fout_coefficienten_1_h_O_lijst", "A5_coefficienten_1_v_O_lijst", "A5_fout_coefficienten_1_v_O_lijst"]
 
-#     writer.writerow(header)
-#     for i in range(0, len(papier_lijst)):
-#         writer.writerow([papier_lijst[i], coefficienten_1_h_B_lijst[i], fout_coefficienten_1_h_B_lijst[i], coefficienten_1_v_B_lijst[i], fout_coefficienten_1_v_B_lijst[i]])
+    writer.writerow(header)
+    for i in range(0, len(papier_lijst)):
+        writer.writerow([papier_lijst[i], coefficienten_1_h_B_lijst[i], fout_coefficienten_1_h_B_lijst[i], coefficienten_1_v_B_lijst[i], fout_coefficienten_1_v_B_lijst[i]])
