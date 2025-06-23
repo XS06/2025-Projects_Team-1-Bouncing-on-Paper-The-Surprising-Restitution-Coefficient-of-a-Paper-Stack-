@@ -9,13 +9,13 @@ import csv as csv
 import statistics as stat
 
 
-A4_CSV = open('E:/Documents/GitHub/2025-Projects_Team-1-Bouncing-on-Paper-The-Surprising-Restitution-Coefficient-of-a-Paper-Stack-/Code/A4_data.csv', 'r')
-A5_B_CSV = open('E:/Documents/GitHub/2025-Projects_Team-1-Bouncing-on-Paper-The-Surprising-Restitution-Coefficient-of-a-Paper-Stack-/Code/A5_B_data.csv', 'r')
-A5_O_CSV = open('E:/Documents/GitHub/2025-Projects_Team-1-Bouncing-on-Paper-The-Surprising-Restitution-Coefficient-of-a-Paper-Stack-/Code/A5_O_data.csv', 'r')
+# A4_CSV = open('E:/Documents/GitHub/2025-Projects_Team-1-Bouncing-on-Paper-The-Surprising-Restitution-Coefficient-of-a-Paper-Stack-/Code/A4_data.csv', 'r')
+# A5_B_CSV = open('E:/Documents/GitHub/2025-Projects_Team-1-Bouncing-on-Paper-The-Surprising-Restitution-Coefficient-of-a-Paper-Stack-/Code/A5_B_data.csv', 'r')
+# A5_O_CSV = open('E:/Documents/GitHub/2025-Projects_Team-1-Bouncing-on-Paper-The-Surprising-Restitution-Coefficient-of-a-Paper-Stack-/Code/A5_O_data.csv', 'r')
 
-# A4_CSV = open('C:/Users/salad/Documents/GitHub/2025-Projects_Team-1-Bouncing-on-Paper-The-Surprising-Restitution-Coefficient-of-a-Paper-Stack-/Code/A4_data.csv', 'r')
-# A5_B_CSV = open('C:/Users/salad/Documents/GitHub/2025-Projects_Team-1-Bouncing-on-Paper-The-Surprising-Restitution-Coefficient-of-a-Paper-Stack-/Code/A5_B_data.csv', 'r')
-# A5_O_CSV = open('C:/Users/salad/Documents/GitHub/2025-Projects_Team-1-Bouncing-on-Paper-The-Surprising-Restitution-Coefficient-of-a-Paper-Stack-/Code/A5_O_data.csv', 'r')
+A4_CSV = open('C:/Users/salad/Documents/GitHub/2025-Projects_Team-1-Bouncing-on-Paper-The-Surprising-Restitution-Coefficient-of-a-Paper-Stack-/Code/A4_data.csv', 'r')
+A5_B_CSV = open('C:/Users/salad/Documents/GitHub/2025-Projects_Team-1-Bouncing-on-Paper-The-Surprising-Restitution-Coefficient-of-a-Paper-Stack-/Code/A5_B_data.csv', 'r')
+A5_O_CSV = open('C:/Users/salad/Documents/GitHub/2025-Projects_Team-1-Bouncing-on-Paper-The-Surprising-Restitution-Coefficient-of-a-Paper-Stack-/Code/A5_O_data.csv', 'r')
 
 
 with A4_CSV as A4:
@@ -58,14 +58,14 @@ with A4_CSV as A4:
             else:
                 print(papier, A4_papier_lijst[papier], A4_papier_lijst[papier + 1])
                 A4_compressed_papier_lijst.append(A4_papier_lijst[papier])
-                A4_temp_h_list = [A4_coefficienten_1_h_lijst[papier]]
-                A4_fout_temp_h_list = [A4_fout_coefficienten_1_h_lijst[papier]]
+                A4_temp_h_list = [A4_coefficienten_1_h_lijst[papier], A4_coefficienten_1_h_lijst[papier + 1]]
+                A4_fout_temp_h_list = [A4_fout_coefficienten_1_h_lijst[papier], A4_fout_coefficienten_1_h_lijst[papier + 1]]
                 A4_avg_h_lijst.append(float(np.mean(A4_temp_h_list)))
                 A4_fout_h_lijst.append(float(np.sqrt(np.std(A4_temp_h_list) + np.var(A4_fout_temp_h_list))))
-                A5_temp_v_B_list = [A4_coefficienten_1_v_lijst[papier]]
-                A5_fout_temp_v_B_list = [A4_fout_coefficienten_1_v_lijst[papier]]
-                A4_avg_v_lijst.append(float(np.mean(A5_temp_v_B_list)))
-                A4_fout_v_lijst.append(float(np.sqrt(np.std(A5_temp_v_B_list) + np.var(A5_fout_temp_v_B_list))))
+                A4_temp_v_list = [A4_coefficienten_1_v_lijst[papier]]
+                A4_fout_temp_v_list = [A4_fout_coefficienten_1_v_lijst[papier]]
+                A4_avg_v_lijst.append(float(np.mean(A4_temp_v_list)))
+                A4_fout_v_lijst.append(float(np.sqrt(np.std(A4_temp_h_list) + np.var(A4_fout_temp_v_list))))
         
 
     A4_CSV.close()
