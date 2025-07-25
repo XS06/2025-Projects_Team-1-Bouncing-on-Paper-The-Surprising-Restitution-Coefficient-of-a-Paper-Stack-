@@ -91,8 +91,6 @@ with open(f'{1}-{60}-M.csv', 'r') as yurr:
     coefficienten_1_lijst.append(cor1)
     coefficienten_2_lijst.append(cor2)
     coefficienten_3_lijst.append(cor3)
-
-
     print(cor1, cor2, cor3)
 
 print(coefficienten_1_lijst)
