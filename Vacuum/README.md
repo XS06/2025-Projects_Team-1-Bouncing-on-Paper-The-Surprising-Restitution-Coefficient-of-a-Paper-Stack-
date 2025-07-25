@@ -14,6 +14,8 @@ Deze dingen worden er uitgevoerd in het bestand:
 5. Vervolgens wordt er een periode tussen 2 stuiters geisoleerd van één meting. Hier wordt een parabool op gefit. De wortel van de reduced chi-sqaured is namelijk gelijk aan de fout die de trackingssoftware heeft. Dit wordt dus gebruikt om de fout op de restitutie coëfficiënt te berekenen (deze waarde wordt al eerder in de code gebruikt).
 6. Tot slot wordt er nog een grafiek gemaakt waarbij de restitutie coëfficiënt wordt uitgezet tegen de luchtdruk, maar nu bevat de grafiek ook de bijbehoorende foutvlaggen. Door de lekende vacuumkamer zit er een grote fout op de luchtdruk. Zowel voor als na het uitvoeren van een meting is de luchtdruk afgelezen. Dit had vaak een verschil van 10mbar. Maar er zit ook nog een fout van het aflezen bij van ±10mbar.
    
+NOTE:  edit the tracking of the 95/100 & 190&200 mbar files; error suspected due to outlier.
+
 
 In het bestand genaamd 'amount_of_paperVScor_at_30mbar.ipynb' wordt er een grafiek gemaakt waarbij de restitutie coëfficiënt wordt uitgezet tegen de aantal vellen papier met een standaard luchtdruk van 30mbar ± 10. 
 Hiervoor worden de meetingen gebruikt een druk van 30mbar.
