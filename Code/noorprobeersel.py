@@ -1,3 +1,4 @@
+
 # Naam: Saladin Shah
 # Studentnummer: 15817490
 
@@ -16,12 +17,12 @@ a_lijst = [1, 2, 3]
 b_lijst = [1, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 30, 40, 45, 50, 55, 60]
 #for b in b_lijst:
 #    for a in a_lijst:
-with open(f'{1}-{60}-M.csv', 'r') as yurr:
+with open(f'/Users/noor/Documents/GitHub/2025-Projects_Team-1-Bouncing-on-Paper-The-Surprising-Restitution-Coefficient-of-a-Paper-Stack-/Code/{1}-{60}-M.csv', 'r') as yurr:
     hoogte_lijst = []
-    tijd_lijst = []
+    frame_lijst = []
     teller = 0
     stuiteraantal = 0
-    tijd = 0
+    frame = 0
 
     for regel in yurr:
         data_opgeknipt = regel.strip().split()
@@ -33,19 +34,19 @@ with open(f'{1}-{60}-M.csv', 'r') as yurr:
             if data_opgeknipt and data_opgeknipt[0] != 'Frame':
                 if data_opgeknipt and data_opgeknipt[0] != 'Tracks':
                     if data_opgeknipt and data_opgeknipt[0] != 'Track':
-                        if tijd >= 29:
-                            tijd = int(data_opgeknipt[0])
+                        if frame >= 29:
+                            frame = int(data_opgeknipt[0])
                             y1 = float(data_opgeknipt[4])
                             hoogte = 1000 - y1
 
-                            tijd_lijst.append(tijd)
+                            frame_lijst.append(frame)
                             hoogte_lijst.append(hoogte)
                         else:
-                            tijd = int(data_opgeknipt[0])
+                            frame = int(data_opgeknipt[0])
                             y1 = float(data_opgeknipt[2])
                             hoogte = 1000 - y1
 
-                            tijd_lijst.append(tijd)
+                            frame_lijst.append(frame)
                             hoogte_lijst.append(hoogte)        
                     else:
                         teller +=1
@@ -91,6 +92,8 @@ with open(f'{1}-{60}-M.csv', 'r') as yurr:
     coefficienten_1_lijst.append(cor1)
     coefficienten_2_lijst.append(cor2)
     coefficienten_3_lijst.append(cor3)
+
+
     print(cor1, cor2, cor3)
 
 print(coefficienten_1_lijst)
